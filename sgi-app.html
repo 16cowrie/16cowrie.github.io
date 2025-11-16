@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="theme-color" content="#0b0b0f" />
+<meta name="color-scheme" content="dark" />
+<title>SwamiG Institute — Divination Module Application</title>
+
+<style>
+:root{
+  --bg:#0b0b0f;
+  --ink:#eaeaf2;
+  --muted:#b5b5c4;
+  --accent:#bb66ff;
+  --accent-muted:rgba(187,102,255,.18);
+  --accent-lineage:rgba(102,255,178,.35);
+  --radius:20px;
+  --card:rgba(30,30,40,.95);
+  --border:rgba(255,255,255,.12);
+  --ring:rgba(187,102,255,.35);
+  --max:1100px;
+}
+
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  background:radial-gradient(1200px 600px at 10% -5%, rgba(187,102,255,.14), transparent 60%),
+             radial-gradient(900px 500px at 100% 0%, rgba(102,255,178,.10), transparent 60%),
+             var(--bg);
+}
+a{text-decoration:none;color:inherit}
+
+/* ------------------ Notice Bar ------------------ */
+.noticebar{
+  text-align:center;font-size:12px;padding:6px 12px;
+  background:rgba(187,102,255,.12);color:#d9c6ff;
+  border-bottom:1px solid rgba(187,102,255,.25);
+}
+
+/* ------------------ SGI Top Cards ------------------ */
+.top-cards-wrap{
+  background:rgba(11,11,15,.85);
+  border-bottom:1px solid rgba(255,255,255,.08)
+}
+.top-cards{
+  max-width:var(--max);margin:auto;padding:8px 10px;
+  display:grid;gap:8px;
+}
+@media(min-width:900px){
+  .top-cards{grid-template-columns:repeat(auto-fit,minmax(90px,1fr))}
+}
+@media(max-width:899px){
+  .top-cards{grid-template-columns:1fr 1fr}
+}
+.top-card{
+  border-radius:10px;padding:8px;border:1px solid var(--border);
+  background:linear-gradient(145deg,var(--card),rgba(18,18,25,.95));
+  transition:.2s;display:block;
+}
+.top-card:hover{
+  transform:translateY(-2px);border-color:rgba(255,255,255,.22);
+  outline:2px solid var(--ring);
+}
+.top-card h3{margin:0;font-size:11px;font-weight:700}
+.top-card p{margin:0;color:var(--muted);font-size:10px}
+
+/* ------------------ SGI Logo ------------------ */
+.logo{
+  width:130px;margin:32px auto;border-radius:50%;
+  overflow:hidden;box-shadow:0 0 14px rgba(187,102,255,.30);
+  border:1px solid rgba(255,255,255,.15);
+}
+.logo img{width:100%;display:block}
+
+/* ------------------ SGI Form Card ------------------ */
+.sgi-form-card {
+  max-width: 880px;
+  margin: 40px auto;
+  padding: 32px 32px 40px;
+  background: #14141c;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 22px rgba(0,0,0,0.55);
+  color: var(--ink);
+}
+
+.sgi-form-card h2 {
+  margin: 0 0 14px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #eaeaf2;
+}
+.sgi-form-card p { color: #bfc3d1; }
+
+/* Two-column grid */
+.sgi-grid-2 {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+@media(max-width:700px){
+  .sgi-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* Label text */
+.sgi-form-card label span {
+  color: #d0d1da;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+/* Inputs */
+.sgi-form-card input,
+.sgi-form-card select,
+.sgi-form-card textarea {
+  padding: 12px;
+  border-radius: 12px;
+  background: #1e1e28;
+  border: 1px solid #2a2a38;
+  color: #eaeaf2;
+  font-size: 15px;
+  transition: .2s ease;
+}
+
+.sgi-form-card input::placeholder,
+.sgi-form-card textarea::placeholder {
+  color: #9da0b2;
+}
+
+.sgi-form-card input:focus,
+.sgi-form-card select:focus,
+.sgi-form-card textarea:focus {
+  outline: none;
+  border-color: #bb66ff;
+  box-shadow: 0 0 0 2px rgba(187,102,255,0.25);
+}
+
+/* Fieldset */
+.sgi-form-card fieldset {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 16px 16px 20px;
+  background: #181820;
+}
+.sgi-form-card legend {
+  padding: 0 8px;
+  color: #eaeaf2;
+  font-weight: 600;
+}
+
+/* Submit button */
+.sgi-btn {
+  background: linear-gradient(135deg, #bb66ff, #8f4ccd);
+  border: none;
+  padding: 14px 20px;
+  width: 100%;
+  border-radius: 12px;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(187,102,255,0.25);
+  transition: .2s ease;
+}
+.sgi-btn:hover {
+  box-shadow: 0 0 18px rgba(187,102,255,0.35);
+  transform: translateY(-1px);
+}
+
+#sgi-status {
+  color: #bfc3d1;
+  margin-left: 10px;
+}
+</style>
+</head>
+<body>
+
+<!-- ------------------ Notice Bar ------------------ -->
+<div class="noticebar">
+  Call <strong>70-888-SWAMI</strong> • Michigan nonprofit — 501(c)(3) pending
+</div>
+
+<!-- ------------------ SGI Top Cards ------------------ -->
+<div class="top-cards-wrap">
+  <div class="top-cards">
+    <a class="top-card" href="/missionsgi/index.html"><h3>0 — Mission</h3><p>Our guiding vision</p></a>
+    <a class="top-card" href="/lineagesgi/index.html"><h3>1 — Lineage</h3><p>Anke–Karade</p></a>
+    <a class="top-card" href="/ilekesgi/index.html"><h3>2 — Ilekes</h3><p>Ritual & Education</p></a>
+    <a class="top-card" href="/warriorsgi/index.html"><h3>3 — Warriors</h3><p>Eshu • Ogun • Ochosi</p></a>
+    <a class="top-card" href="/handsgi/index.html"><h3>4 — Hand of Ifá</h3><p>Ìkín consecration</p></a>
+    <a class="top-card" href="/priestsgi/index.html"><h3>5 — Initiations</h3><p>Priesthood</p></a>
+    <a class="top-card" href="/obiorishasgi/index.html"><h3>6 — Divination</h3><p>How to Divine</p></a>
+  </div>
+</div>
+
+<!-- ------------------ SGI Logo ------------------ -->
+
+<!-- ------------------ APPLICATION FORM ------------------ -->
+<section id="orisha-application" class="sgi-form-card">
+
+  <div style="text-align:center;margin-bottom:20px;">
+    <img src="SwamiG.gif" width="70">
+    <h1 style="margin:10px 0 6px;font-size:32px;color:#eaeaf2;">SwamiG Institute</h1>
+    <p style="color:#bfc3d1;">Modules of Enlightenment for the Diaspora</p>
+  </div>
+
+  <h2>Application</h2>
+  <p>Complete this application to begin. Submissions are securely delivered and logged.</p>
+
+  <form id="sgi-app" novalidate>
+
+    <!-- CONTACT -->
+    <div class="sgi-grid-2">
+      <label><span>Legal name *</span><input name="legal_name" required></label>
+      <label><span>Preferred name</span><input name="preferred_name"></label>
+      <label><span>Email *</span><input type="email" name="email" required></label>
+      <label><span>Phone</span><input name="phone"></label>
+    </div>
+
+    <!-- INITIATION -->
+    <div class="sgi-grid-2" style="margin-top:16px;">
+      <label>
+        <span>Initiation role *</span>
+        <select name="role" required>
+          <option disabled selected>Choose…</option>
+          <option>Oba</option><option>Queen Mother</option>
+          <option>Babalawo</option><option>Iyanifa</option>
+          <option>Babalorisa</option><option>Iyalorisa</option>
+          <option>Aborisha</option><option>Other</option>
+        </select>
+      </label>
+
+      <label><span>Primary Orisha</span><input name="primary_orisha"></label>
+      <label><span>Lineage / Ile *</span><input name="lineage" required></label>
+      <label><span>Teacher</span><input name="teacher"></label>
+      <label><span>Initiation date</span><input type="date" name="initiation_date"></label>
+      <label><span>Initiation location</span><input name="initiation_location"></label>
+    </div>
+
+    <!-- STUDY INTERESTS -->
+    <fieldset style="margin-top:16px;">
+      <legend>Study interests</legend>
+      <div class="sgi-grid-2" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+        <label><input type="checkbox" name="study_interests" value="Merindilogun"> Merindilogun</label>
+        <label><input type="checkbox" name="study_interests" value="Orisha-Pele"> Orisha-Pele</label>
+        <label><input type="checkbox" name="study_interests" value="Obi-Orisha"> Obi Orisha</label>
+        <label><input type="checkbox" name="study_interests" value="Obi Abata"> Obi Abata</label>
+        <label><input type="checkbox" name="study_interests" value="Four Cowrie"> Four Cowrie</label>
+        <label><input type="checkbox" name="study_interests" value="Card Divination"> Card Divination</label>
+        <label><input type="checkbox" name="study_interests" value="Own System"> My own system</label>
+      </div>
+    </fieldset>
+
+    <!-- GOALS -->
+    <label style="margin-top:16px;">
+      <span>Goals & experience</span>
+      <textarea name="goals" rows="5"></textarea>
+    </label>
+
+    <!-- CONSENT -->
+    <label style="display:flex;align-items:flex-start;gap:10px;margin-top:16px;">
+      <input type="checkbox" name="agree_ethics" required>
+      <span>I affirm I will honor SGI ethics, Iwapele, Laws of Maat, and consent to data processing. *</span>
+    </label>
+
+    <input type="text" name="website" tabindex="-1" style="position:absolute;left:-9999px;opacity:0">
+
+    <button class="sgi-btn" type="submit">Submit Application</button>
+    <span id="sgi-status"></span>
+
+  </form>
+</section>
+
+<script>
+const FORM_ENDPOINT = "https://sgi-mailgun.fasuuruate.workers.dev";
+
+document.getElementById('sgi-app').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const form = e.target;
+  const statusEl = document.getElementById('sgi-status');
+  statusEl.textContent="Submitting…";
+
+  if(!form.reportValidity()){statusEl.textContent="Complete required fields.";return;}
+  if(form.website.value){statusEl.textContent="Blocked.";return;}
+
+  const fd = new FormData(form);
+  const interests=[...document.querySelectorAll('input[name="study_interests"]:checked')].map(i=>i.value);
+
+  const payload={
+    legal_name:fd.get('legal_name'),
+    preferred_name:fd.get('preferred_name'),
+    email:fd.get('email'),
+    phone:fd.get('phone'),
+    role:fd.get('role'),
+    primary_orisha:fd.get('primary_orisha'),
+    lineage:fd.get('lineage'),
+    teacher:fd.get('teacher'),
+    initiation_date:fd.get('initiation_date'),
+    initiation_location:fd.get('initiation_location'),
+    study_interests:interests,
+    goals:fd.get('goals'),
+    agree_ethics:!!fd.get('agree_ethics'),
+    page:location.href,
+    submitted_at:new Date().toISOString()
+  };
+
+  try{
+    const res=await fetch(FORM_ENDPOINT,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(payload)
+    });
+    const out=await res.json();
+
+    if(out.redirect){window.location.href=out.redirect;}
+    else{
+      statusEl.textContent="Submitted!";
+      form.reset();
+    }
+  }catch(err){
+    statusEl.textContent="Error — try again.";
+  }
+});
+</script>
+   Governed by Edi Meji/ Het Heru Hetep
+</body>
+</html>
